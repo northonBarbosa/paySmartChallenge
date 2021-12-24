@@ -39,6 +39,7 @@ class MoviefyBottomNavigationBarWidget extends StatelessWidget {
               size: 28,
             ),
             label: '-',
+            tooltip: '',
           ),
           BottomNavigationBarItem(
             icon: Icon(
@@ -51,6 +52,7 @@ class MoviefyBottomNavigationBarWidget extends StatelessWidget {
               size: 28,
             ),
             label: '-',
+            tooltip: '',
           ),
           BottomNavigationBarItem(
             icon: Icon(
@@ -63,6 +65,7 @@ class MoviefyBottomNavigationBarWidget extends StatelessWidget {
               size: 28,
             ),
             label: '-',
+            tooltip: '',
           ),
         ],
       );
