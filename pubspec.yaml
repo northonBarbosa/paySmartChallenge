@@ -21,6 +21,10 @@ dependencies:
   # C
   cupertino_icons: ^1.0.2
 
+  # D
+  dartz: ^0.10.1
+  dio: ^4.0.4
+
   # F
   flutter_vector_icons: ^1.0.0
 
@@ -28,8 +32,8 @@ dependencies:
   get: ^4.6.1
   google_fonts: ^2.1.1
 
-  # H
-  http: ^0.13.4
+  # I
+  intl: ^0.17.0
 
   # L
   lottie: ^1.2.1

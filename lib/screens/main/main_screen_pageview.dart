@@ -2,6 +2,8 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
+import 'package:moviefy_app/screens/all_movies/all_movies_screen.dart';
+import 'package:moviefy_app/screens/home/home_screen.dart';
 
 import '/widgets/bottom_navigation_bar/moviefy_bottom_navigation_bar_widget.dart';
 import '/utils/ui/colors.dart';
@@ -13,7 +15,7 @@ class MainScreenPageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BottomNavigationBarController _bottomNavController = Get.put(BottomNavigationBarController());
-    PageController _pageController = Get.put(PageController(), tag: 'main_page_controller');
+    PageController _pageController = Get.put(PageController(initialPage: 1), tag: 'main_page_controller');
 
     return Scaffold(
       body: FadeIn(
@@ -23,26 +25,8 @@ class MainScreenPageView extends StatelessWidget {
             _bottomNavController.currentIndex.value = page;
           },
           children: [
-            Container(
-              color: kMoviefyPrimaryColor,
-              child: const Center(
-                child: Icon(
-                  Feather.film,
-                  color: Colors.white,
-                  size: 50,
-                ),
-              ),
-            ),
-            Container(
-              color: kMoviefyPrimaryColor,
-              child: const Center(
-                child: Icon(
-                  Feather.home,
-                  color: Colors.white,
-                  size: 50,
-                ),
-              ),
-            ),
+            const AllMoviesScreen(),
+            const HomeScreen(),
             Container(
               color: kMoviefyPrimaryColor,
               child: const Center(
