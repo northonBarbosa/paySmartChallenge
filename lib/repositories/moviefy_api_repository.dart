@@ -33,4 +33,20 @@ class MoviefyApiRepository {
       return Left(MoviefyApiRepositoryError(error.toString()));
     }
   }
+
+  Future<Either<MoviefyError, MovieResponseModel>> searchMovie(String title, int page) async {
+    try {
+      final response = await _dio.get(
+        '/search/movie?page=$page',
+        queryParameters: {'query': title, 'include_adult': false},
+      );
+      final model = MovieResponseModel.fromMap(response.data);
+
+      return Right(model);
+    } on DioError catch (error) {
+      return Left(MoviefyApiRepositoryError(error.response!.data['status_message']));
+    } on Exception catch (error) {
+      return Left(MoviefyApiRepositoryError(error.toString()));
+    }
+  }
 }

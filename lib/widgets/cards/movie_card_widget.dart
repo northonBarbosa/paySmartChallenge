@@ -22,6 +22,13 @@ class MovieCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    late ImageProvider _posterImage;
+
+    poster != ''
+        ? _posterImage = NetworkImage('https://image.tmdb.org/t/p/original/$poster')
+        : _posterImage = const NetworkImage(
+            'https://images.unsplash.com/photo-1620145648299-f926ac0a9470?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80');
+
     return Container(
       height: 150,
       width: Get.width,
@@ -60,7 +67,7 @@ class MovieCard extends StatelessWidget {
                 Radius.circular(7),
               ),
               child: Image(
-                image: NetworkImage('https://image.tmdb.org/t/p/original/$poster'),
+                image: _posterImage,
                 width: Get.width * 0.23,
                 height: 150,
                 fit: BoxFit.cover,
@@ -90,15 +97,8 @@ class MovieCard extends StatelessWidget {
                 ),
                 Container(
                   height: 40,
-                  child: ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    padding: const EdgeInsets.only(left: 3, right: 8),
-                    scrollDirection: Axis.horizontal,
-                    itemCount: genres.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(left: 5.0),
-                        child: Chip(
+                  child: genres.isEmpty
+                      ? Chip(
                           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           backgroundColor: kMoviefyPrimaryColor,
                           elevation: 2,
@@ -106,16 +106,42 @@ class MovieCard extends StatelessWidget {
                             color: kMoviefyDesertSand,
                             width: 1.1,
                           ),
-                          label: Text(genres[index]),
+                          label: Text('Sem gênero'),
                           labelStyle: GoogleFonts.comfortaa(
                             color: Colors.white,
                             fontSize: 11,
                           ),
                           visualDensity: VisualDensity.compact,
+                        )
+                      : Center(
+                          child: ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            padding: const EdgeInsets.only(left: 3, right: 8),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: genres.length,
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.only(left: 5.0),
+                                child: Chip(
+                                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                  backgroundColor: kMoviefyPrimaryColor,
+                                  elevation: 2,
+                                  side: const BorderSide(
+                                    color: kMoviefyDesertSand,
+                                    width: 1.1,
+                                  ),
+                                  label: Text(genres[index]),
+                                  labelStyle: GoogleFonts.comfortaa(
+                                    color: Colors.white,
+                                    fontSize: 11,
+                                  ),
+                                  visualDensity: VisualDensity.compact,
+                                ),
+                              );
+                            },
+                          ),
                         ),
-                      );
-                    },
-                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -142,7 +168,9 @@ class MovieCard extends StatelessWidget {
                           ),
                           const SizedBox(width: 5),
                           Text(
-                            DateFormat('dd/MM/yyyy').format(DateTime.parse(releaseDate)),
+                            releaseDate.isNotEmpty
+                                ? DateFormat('dd/MM/yyyy').format(DateTime.parse(releaseDate))
+                                : '-/-/-',
                             style: GoogleFonts.comfortaa(
                               color: kMoviefyDesertSand,
                               height: 1.1,

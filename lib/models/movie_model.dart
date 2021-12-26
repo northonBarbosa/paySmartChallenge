@@ -23,7 +23,7 @@ class MovieModel {
         genreIds: List<int>.from(
           json['genre_ids'].map((value) => value),
         ),
-        poster: json['poster_path'],
-        releaseDate: json['release_date'],
+        poster: json['poster_path'] ?? '',
+        releaseDate: json['release_date'] ?? '',
       );
 }
