@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '/widgets/appbar/moviefy_appbar.dart';
 import '/widgets/cards/movie_card_widget.dart';

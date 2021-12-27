@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -33,7 +34,7 @@ class MovieReleaseDateChip extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom: 3.0),
+            padding: EdgeInsets.only(bottom: Get.width * 0.007),
             child: Icon(
               SimpleLineIcons.calendar,
               color: kMoviefyDesertSand,

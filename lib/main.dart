@@ -5,7 +5,7 @@ import 'package:moviefy_app/utils/ui/colors.dart';
 
 import 'screens/main/main_screen_pageview.dart';
 
-void main() {
+void main() async {
   runApp(const MyApp());
 }
 

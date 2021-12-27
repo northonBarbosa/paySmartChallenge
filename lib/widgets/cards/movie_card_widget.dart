@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '/widgets/buttons/movie_favorite_button.dart';
 import '/widgets/chips/movie_release_date_chip.dart';
-
 import '/screens/movie_details/movie_details_screen.dart';
 import '/widgets/chips/movie_genre_chip.dart';
 import '/utils/ui/colors.dart';
@@ -82,13 +81,6 @@ class MovieCard extends StatelessWidget {
                   fit: BoxFit.cover,
                   placeholderFit: BoxFit.scaleDown,
                 ),
-                // child:  FadeInImage(
-                //   image: NetworkImage('https://image.tmdb.org/t/p/original/fVzXp3NwovUlLe7fvoRynCmBPNc.jpg'),
-                //   placeholder: ,
-                //   width: Get.width * 0.2,
-                //   height: 150,
-                //   fit: BoxFit.cover,
-                //   ),
               ),
             ),
             Container(

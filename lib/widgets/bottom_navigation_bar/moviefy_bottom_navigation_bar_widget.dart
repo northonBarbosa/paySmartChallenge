@@ -10,7 +10,7 @@ class MoviefyBottomNavigationBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BottomNavigationBarController _bottomNavController = Get.find();
+    BottomNavigationBarController _bottomNavController = BottomNavigationBarController();
     PageController _pageController = Get.find(tag: 'main_page_controller');
 
     return Obx(() {

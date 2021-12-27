@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:moviefy_app/utils/ui/colors.dart';
 
-class MovieFavoriteButton extends StatelessWidget {
+class MovieFavoriteButton extends StatefulWidget {
   const MovieFavoriteButton({
     Key? key,
     required this.onTap,
@@ -14,9 +15,20 @@ class MovieFavoriteButton extends StatelessWidget {
   final double fontSize;
 
   @override
+  State<MovieFavoriteButton> createState() => _MovieFavoriteButtonState();
+}
+
+class _MovieFavoriteButtonState extends State<MovieFavoriteButton> {
+  bool _isFavorite = false;
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        widget.onTap;
+        _isFavorite = !_isFavorite;
+        setState(() {});
+      },
       child: Container(
         padding: const EdgeInsets.symmetric(
           horizontal: 8,
@@ -31,14 +43,14 @@ class MovieFavoriteButton extends StatelessWidget {
           ),
         ),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: 2),
+              padding: EdgeInsets.only(bottom: Get.width * 0.003),
               child: Icon(
-                SimpleLineIcons.heart,
-                color: kMoviefyBlackCoral,
-                size: fontSize,
+                _isFavorite ? FontAwesome.heart : FontAwesome.heart_o,
+                color: _isFavorite ? Colors.red : kMoviefyBlackCoral,
+                size: widget.fontSize,
               ),
             ),
             const SizedBox(width: 5),
@@ -47,7 +59,7 @@ class MovieFavoriteButton extends StatelessWidget {
               style: GoogleFonts.comfortaa(
                 color: kMoviefyBlackCoral,
                 height: 1.1,
-                fontSize: fontSize,
+                fontSize: widget.fontSize,
               ),
             ),
           ],
