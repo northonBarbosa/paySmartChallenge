@@ -1,11 +1,11 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:moviefy_app/widgets/appbar/moviefy_appbar.dart';
 
-import '/screens/search/search_screen.dart';
-import '/utils/ui/colors.dart';
+import '/widgets/buttons/search_button.dart';
+import '../../widgets/appbar/custom_sliver_appbar_widget.dart';
 import '/widgets/cards/movie_card_widget.dart';
 import '/widgets/loadings/custom_circular_progress_indicator.dart';
 import '/widgets/loadings/moviefy_loading_lottie.dart';
@@ -50,16 +50,7 @@ class _AllMoviesScreenState extends State<AllMoviesScreen> {
         ? const MoviefyLoadingLottie()
         : CustomScrollView(
             slivers: [
-              CustomSliverAppBar(
-                leading: IconButton(
-                  onPressed: () => Get.to(const SearchMovieScreen()),
-                  icon: const Icon(SimpleLineIcons.magnifier),
-                ),
-                title: Text(
-                  'Filmes',
-                  style: GoogleFonts.anton(),
-                ),
-              ),
+              const MoviefyAppBar(title: 'Filmes'),
               SliverList(
                 delegate: SliverChildBuilderDelegate((context, i) {
                   if (i == _allMoviesController.moviesList.length - 3 &&
@@ -88,27 +79,5 @@ class _AllMoviesScreenState extends State<AllMoviesScreen> {
               ),
             ],
           );
-  }
-}
-
-class CustomSliverAppBar extends StatelessWidget {
-  const CustomSliverAppBar({
-    Key? key,
-    this.leading,
-    this.title,
-  }) : super(key: key);
-
-  final Widget? leading;
-  final Widget? title;
-
-  @override
-  Widget build(BuildContext context) {
-    return SliverAppBar(
-      leading: leading,
-      title: title,
-      centerTitle: true,
-      floating: true,
-      backgroundColor: kMoviefyBlackCoral,
-    );
   }
 }

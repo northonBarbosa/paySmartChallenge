@@ -55,6 +55,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kMoviefyBackgroundColor,
       body: isLoading
           ? const MoviefyLoadingLottie()
           : FadeIn(
@@ -109,7 +110,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                         ),
                       ),
                       Container(
-                        color: Colors.white,
+                        color: kMoviefyBackgroundColor,
                         child: Column(
                           children: [
                             const SizedBox(height: 15),

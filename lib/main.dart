@@ -18,10 +18,10 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Moviefy',
       theme: ThemeData(
-        fontFamily: GoogleFonts.nunito().fontFamily,
-        backgroundColor: kMoviefyBackgroundColor,
-        primaryColor: kMoviefyPrimaryColor,
-      ),
+          fontFamily: GoogleFonts.nunito().fontFamily,
+          backgroundColor: kMoviefyBackgroundColor,
+          primaryColor: kMoviefyPrimaryColor,
+          colorScheme: ColorScheme.fromSwatch().copyWith(secondary: kMoviefyDesertSand)),
       home: const MainScreenPageView(),
     );
   }
