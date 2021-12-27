@@ -19,12 +19,12 @@ class MovieCardSectionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late ImageProvider _backgroundPoster;
+    late String _backgroundPoster;
 
     backgroundPoster != ''
-        ? _backgroundPoster = NetworkImage('https://image.tmdb.org/t/p/original/$backgroundPoster')
-        : _backgroundPoster = const NetworkImage(
-            'https://images.unsplash.com/photo-1620145648299-f926ac0a9470?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80');
+        ? _backgroundPoster = 'https://image.tmdb.org/t/p/original/$backgroundPoster'
+        : _backgroundPoster =
+            'https://images.unsplash.com/photo-1620145648299-f926ac0a9470?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80';
     return FadeIn(
       child: GestureDetector(
         onTap: () => Get.to(MovieDetailsScreen(movieId: movieId)),
@@ -51,11 +51,14 @@ class MovieCardSectionWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             child: Stack(
               children: [
-                Image(
+                FadeInImage.assetNetwork(
+                  placeholder: 'assets/movie.png',
+                  fadeInDuration: const Duration(milliseconds: 300),
                   image: _backgroundPoster,
-                  fit: BoxFit.cover,
                   width: Get.width * 0.55,
                   height: Get.width * 0.35,
+                  fit: BoxFit.cover,
+                  placeholderFit: BoxFit.scaleDown,
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,

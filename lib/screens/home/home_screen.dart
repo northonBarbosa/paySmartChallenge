@@ -1,13 +1,11 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:moviefy_app/controllers/trending_movies_controller.dart';
-import 'package:moviefy_app/screens/home/components/northons_movies_row_list.dart';
-import 'package:moviefy_app/screens/home/components/only_theaters_movies_row_list.dart';
-import 'package:moviefy_app/screens/home/components/top_rated_row_list.dart';
-import 'package:moviefy_app/screens/home/components/tranding_day_movies_row_list.dart';
 
+import '/controllers/trending_movies_controller.dart';
+import '/screens/home/components/northons_movies_row_list.dart';
+import '/screens/home/components/only_theaters_movies_row_list.dart';
+import '/screens/home/components/top_rated_row_list.dart';
+import '/screens/home/components/tranding_day_movies_row_list.dart';
 import '/widgets/appbar/moviefy_appbar.dart';
 import '/utils/ui/colors.dart';
 import 'components/trending_movies_row_list.dart';
@@ -41,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
         child: CustomScrollView(
           slivers: [
             const MoviefyAppBar(
-              title: 'Moviefy',
+              title: 'MOVIEFY',
             ),
             SliverList(
               delegate: SliverChildListDelegate(

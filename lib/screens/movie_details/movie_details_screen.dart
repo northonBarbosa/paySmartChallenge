@@ -21,11 +21,11 @@ class MovieDetailsScreen extends StatefulWidget {
 
 class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   final MovieDetailsController _detailsController = MovieDetailsController();
-  ImageProvider posterImage = const NetworkImage(
-      'https://images.unsplash.com/photo-1620145648299-f926ac0a9470?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80');
+  String posterImage =
+      'https://images.unsplash.com/photo-1620145648299-f926ac0a9470?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80';
 
-  ImageProvider backgroundImage = const NetworkImage(
-      'https://images.unsplash.com/photo-1574267432553-4b4628081c31?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1331&q=80');
+  String backgroundImage =
+      'https://images.unsplash.com/photo-1574267432553-4b4628081c31?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1331&q=80';
 
   bool isLoading = true;
 
@@ -43,12 +43,11 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
     });
 
     if (_detailsController.movieDetailsModel!.poster != '') {
-      posterImage = NetworkImage('https://image.tmdb.org/t/p/original/${_detailsController.movieDetailsModel!.poster}');
+      posterImage = 'https://image.tmdb.org/t/p/original/${_detailsController.movieDetailsModel!.poster}';
     }
 
     if (_detailsController.movieDetailsModel!.background != '') {
-      backgroundImage =
-          NetworkImage('https://image.tmdb.org/t/p/original/${_detailsController.movieDetailsModel!.background}');
+      backgroundImage = 'https://image.tmdb.org/t/p/original/${_detailsController.movieDetailsModel!.background}';
     }
   }
 
@@ -69,43 +68,39 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                         bottom: BorderSide(color: kMoviefyDesertSand, width: 5),
                       ),
                     ),
-                    child: Image(
+                    child: FadeInImage.assetNetwork(
+                      placeholder: 'assets/movie.png',
+                      fadeInDuration: const Duration(milliseconds: 300),
                       image: backgroundImage,
                       fit: BoxFit.cover,
+                      placeholderFit: BoxFit.scaleDown,
                     ),
                   ),
                   ListView(
                     padding: EdgeInsets.only(top: Get.width * 0.2),
                     children: [
-                      Hero(
-                        tag: 'movie_${widget.movieId}',
-                        child: Container(
-                          margin: EdgeInsets.symmetric(horizontal: Get.width * 0.28),
-                          height: Get.width * 0.65,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: kMoviefyPrimaryColor, width: 2),
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(8),
-                            ),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: Get.width * 0.28),
+                        height: Get.width * 0.65,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(color: kMoviefyPrimaryColor, width: 2),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(8),
                           ),
-                          child: ClipRRect(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(7),
-                            ),
-                            child: Image(
-                              image: posterImage,
-                              width: Get.width * 0.23,
-                              height: 150,
-                              fit: BoxFit.cover,
-                            ),
-                            // child:  FadeInImage(
-                            //   image: NetworkImage('https://image.tmdb.org/t/p/original/fVzXp3NwovUlLe7fvoRynCmBPNc.jpg'),
-                            //   placeholder: ,
-                            //   width: Get.width * 0.2,
-                            //   height: 150,
-                            //   fit: BoxFit.cover,
-                            //   ),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(7),
+                          ),
+                          child: FadeInImage.assetNetwork(
+                            placeholder: 'assets/movie.png',
+                            fadeInDuration: const Duration(milliseconds: 300),
+                            image: posterImage,
+                            width: Get.width * 0.23,
+                            height: 150,
+                            fit: BoxFit.cover,
+                            placeholderFit: BoxFit.scaleDown,
                           ),
                         ),
                       ),
