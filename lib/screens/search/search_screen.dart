@@ -32,6 +32,7 @@ class _SearchMovieScreenState extends State<SearchMovieScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kMoviefyBackgroundColor,
       body: CustomScrollView(
         slivers: [
           CustomSliverAppBar(
@@ -43,6 +44,9 @@ class _SearchMovieScreenState extends State<SearchMovieScreen> {
                   _searchMoviesController.searchMovie(title: text).then((value) {
                     if (mounted) setState(() {});
                   });
+                } else {
+                  _searchMoviesController.moviesList.clear();
+                  if (mounted) setState(() {});
                 }
               },
               textCapitalization: TextCapitalization.words,
@@ -71,26 +75,30 @@ class _SearchMovieScreenState extends State<SearchMovieScreen> {
           ),
           _searchMoviesController.moviesList.isEmpty
               ? SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: Get.height - AppBar().preferredSize.height - Get.mediaQuery.viewPadding.top,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Image(
-                          image: const AssetImage('assets/clapperboard.png'),
-                          height: Get.width * 0.25,
-                          width: Get.width * 0.25,
-                        ),
-                        const SizedBox(height: 15),
-                        Text(
-                          'Nenhum filme encontrado',
-                          style: GoogleFonts.anton(
-                            fontSize: 16,
-                            letterSpacing: 1.3,
+                  child: GestureDetector(
+                    onTap: () => FocusScope.of(context).unfocus(),
+                    child: Container(
+                      height: Get.height - AppBar().preferredSize.height - Get.mediaQuery.viewPadding.top,
+                      color: kMoviefyBackgroundColor,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Image(
+                            image: const AssetImage('assets/clapperboard.png'),
+                            height: Get.width * 0.25,
+                            width: Get.width * 0.25,
                           ),
-                        ),
-                      ],
+                          const SizedBox(height: 15),
+                          Text(
+                            'Nenhum filme encontrado',
+                            style: GoogleFonts.anton(
+                              fontSize: 16,
+                              letterSpacing: 1.3,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 )

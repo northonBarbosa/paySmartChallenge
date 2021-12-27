@@ -28,6 +28,10 @@ class MovieGenresController {
   }
 
   List<String> getGenresName(List<int> genresIds) {
+    if (genresMap.isEmpty) {
+      fetchGenres();
+    }
+
     List<String> _genresNameList = [];
     for (var i = 0; i < genresIds.length; i++) {
       _genresNameList.add(genresMap[genresIds[i]] ?? '');

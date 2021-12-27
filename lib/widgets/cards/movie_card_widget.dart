@@ -39,7 +39,7 @@ class MovieCard extends StatelessWidget {
       child: Container(
         height: 150,
         width: Get.width,
-        margin: EdgeInsets.fromLTRB(Get.width * 0.03, 8, Get.width * 0.03, 3),
+        margin: EdgeInsets.fromLTRB(10, 8, 10, 3),
         decoration: BoxDecoration(
           color: kMoviefyPrimaryColor,
           boxShadow: [
@@ -92,7 +92,7 @@ class MovieCard extends StatelessWidget {
               ),
             ),
             Container(
-              width: Get.width * 0.7,
+              width: Get.width * 0.695,
               padding: const EdgeInsets.only(top: 3),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -105,7 +105,7 @@ class MovieCard extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     height: 40,
                     child: genres.isEmpty
                         ? Chip(

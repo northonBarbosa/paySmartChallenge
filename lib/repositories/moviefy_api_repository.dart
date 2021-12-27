@@ -1,10 +1,13 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:moviefy_app/core/api/api.dart';
-import 'package:moviefy_app/errors/moviefy_errors.dart';
-import 'package:moviefy_app/models/movie_details_model.dart';
-import 'package:moviefy_app/models/movie_genre_response_model.dart';
-import 'package:moviefy_app/models/movie_response_model.dart';
+
+import '/models/northons_movies_response_model.dart';
+import '/core/api/api.dart';
+import '/errors/moviefy_errors.dart';
+import '/models/movie_details_model.dart';
+import '/models/movie_genre_response_model.dart';
+import '/models/movie_response_model.dart';
+import '/models/section_movies_response_model.dart';
 
 class MoviefyApiRepository {
   final Dio _dio = Dio(kBaseClientOptions);
@@ -26,6 +29,71 @@ class MoviefyApiRepository {
     try {
       final response = await _dio.get('/movie/$id');
       final model = MovieDetailsModel.fromMap(response.data);
+
+      return Right(model);
+    } on DioError catch (error) {
+      return Left(MoviefyApiRepositoryError(error.response!.data['status_message']));
+    } on Exception catch (error) {
+      return Left(MoviefyApiRepositoryError(error.toString()));
+    }
+  }
+
+  Future<Either<MoviefyError, SectionMoviesResponseModel>> fetchTrendingMovies() async {
+    try {
+      final response = await _dio.get('/trending/movie/week');
+      final model = SectionMoviesResponseModel.fromMap(response.data);
+
+      return Right(model);
+    } on DioError catch (error) {
+      return Left(MoviefyApiRepositoryError(error.response!.data['status_message']));
+    } on Exception catch (error) {
+      return Left(MoviefyApiRepositoryError(error.toString()));
+    }
+  }
+
+  Future<Either<MoviefyError, SectionMoviesResponseModel>> fetchTrendingDayMovies() async {
+    try {
+      final response = await _dio.get('/trending/movie/day');
+      final model = SectionMoviesResponseModel.fromMap(response.data);
+
+      return Right(model);
+    } on DioError catch (error) {
+      return Left(MoviefyApiRepositoryError(error.response!.data['status_message']));
+    } on Exception catch (error) {
+      return Left(MoviefyApiRepositoryError(error.toString()));
+    }
+  }
+
+  Future<Either<MoviefyError, NorthonsMoviesResponseModel>> fetchNorthonsMovies() async {
+    try {
+      final response = await _dio.get('/list/8173105');
+      final model = NorthonsMoviesResponseModel.fromMap(response.data);
+
+      return Right(model);
+    } on DioError catch (error) {
+      return Left(MoviefyApiRepositoryError(error.response!.data['status_message']));
+    } on Exception catch (error) {
+      return Left(MoviefyApiRepositoryError(error.toString()));
+    }
+  }
+
+  Future<Either<MoviefyError, SectionMoviesResponseModel>> fetchTopRatedMovies() async {
+    try {
+      final response = await _dio.get('/movie/top_rated?region=BR');
+      final model = SectionMoviesResponseModel.fromMap(response.data);
+
+      return Right(model);
+    } on DioError catch (error) {
+      return Left(MoviefyApiRepositoryError(error.response!.data['status_message']));
+    } on Exception catch (error) {
+      return Left(MoviefyApiRepositoryError(error.toString()));
+    }
+  }
+
+  Future<Either<MoviefyError, SectionMoviesResponseModel>> fetchOnlyTheatersMovies() async {
+    try {
+      final response = await _dio.get('/movie/now_playing?region=BR');
+      final model = SectionMoviesResponseModel.fromMap(response.data);
 
       return Right(model);
     } on DioError catch (error) {

@@ -1,11 +1,8 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:moviefy_app/widgets/appbar/moviefy_appbar.dart';
 
-import '/widgets/buttons/search_button.dart';
-import '../../widgets/appbar/custom_sliver_appbar_widget.dart';
+import '/widgets/appbar/moviefy_appbar.dart';
 import '/widgets/cards/movie_card_widget.dart';
 import '/widgets/loadings/custom_circular_progress_indicator.dart';
 import '/widgets/loadings/moviefy_loading_lottie.dart';
@@ -19,9 +16,9 @@ class AllMoviesScreen extends StatefulWidget {
   State<AllMoviesScreen> createState() => _AllMoviesScreenState();
 }
 
-class _AllMoviesScreenState extends State<AllMoviesScreen> {
+class _AllMoviesScreenState extends State<AllMoviesScreen> with AutomaticKeepAliveClientMixin {
   final AllMoviesController _allMoviesController = AllMoviesController();
-  final MovieGenresController _genresController = Get.put(MovieGenresController());
+  final MovieGenresController _genresController = Get.find();
 
   int _currentPage = 1;
   bool isLoading = true;
@@ -46,6 +43,7 @@ class _AllMoviesScreenState extends State<AllMoviesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return isLoading
         ? const MoviefyLoadingLottie()
         : CustomScrollView(
@@ -80,4 +78,7 @@ class _AllMoviesScreenState extends State<AllMoviesScreen> {
             ],
           );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
