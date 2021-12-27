@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -85,11 +86,14 @@ class _SearchMovieScreenState extends State<SearchMovieScreen> {
                           child: CustomCircularProgressIndicator(),
                         );
                       }
-                      return MovieCard(
-                        title: _searchMoviesController.moviesList[i].title,
-                        poster: _searchMoviesController.moviesList[i].poster,
-                        genres: _genresController.getGenresName(_searchMoviesController.moviesList[i].genreIds),
-                        releaseDate: _searchMoviesController.moviesList[i].releaseDate,
+                      return FadeIn(
+                        child: MovieCard(
+                          id: _searchMoviesController.moviesList[i].id,
+                          title: _searchMoviesController.moviesList[i].title,
+                          poster: _searchMoviesController.moviesList[i].poster,
+                          genres: _genresController.getGenresName(_searchMoviesController.moviesList[i].genreIds),
+                          releaseDate: _searchMoviesController.moviesList[i].releaseDate,
+                        ),
                       );
                     },
                     childCount: _searchMoviesController.moviesList.length +

@@ -9,21 +9,21 @@ class SearchMovieController {
   final MoviefyApiRepository _repository = MoviefyApiRepository();
 
   MoviefyError? moviefyError;
-  MovieResponseModel? moviefyResponseModel;
+  MovieResponseModel? movieResponseModel;
 
-  int get totalPages => moviefyResponseModel?.totalPages ?? 1;
-  List<MovieModel> get moviesList => moviefyResponseModel?.movies ?? [];
+  int get totalPages => movieResponseModel?.totalPages ?? 1;
+  List<MovieModel> get moviesList => movieResponseModel?.movies ?? [];
 
   Future<Either<MoviefyError, MovieResponseModel>> searchMovie({int page = 1, required String title}) async {
     final result = await _repository.searchMovie(title, page);
     result.fold(
       (error) => moviefyError = error,
       (movie) {
-        if (moviefyResponseModel != null) {
-          moviefyResponseModel!.page = movie.page;
-          moviefyResponseModel!.movies.addAll(movie.movies);
+        if (movieResponseModel != null) {
+          movieResponseModel!.page = movie.page;
+          movieResponseModel!.movies.addAll(movie.movies);
         } else {
-          moviefyResponseModel = movie;
+          movieResponseModel = movie;
         }
       },
     );
